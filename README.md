@@ -3,7 +3,7 @@
 | Title|Premier League 21/22|
 | :-------------:|:-------------:|
 |Publication date|31.10.2022.|
-|Licence| CC0 |
+|Licence| mit |
 |Author|Marko Dodik|
 |Version|1.0|
 |Language|English|

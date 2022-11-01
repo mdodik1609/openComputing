@@ -1,3 +1,5 @@
+# install mongoexport before using commands
+
 #export to JSON format from db
 mongoexport --host="localhost:27017" --collection=PremierLeagueCollection --out=premier_league.json
 

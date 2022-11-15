@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Database</title>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <div>
+      <form action="/database">
+      <div class="form-group">
+        <label for="search_value">Search</label>
+        <input type="text" class="form-control" id="search_value" name="search_value" aria-describedby="emailHelp" value="" placeholder="Value">
+        <small id="emailHelp" class="form-text text-muted">Selected</small>
+      </div>
+      <div>
+      <select class="form-select" style="margin-bottom: 15px;" name="polje" aria-label="Default select example">
+        Select key for search
+        <option value="wildcard" selected>All fields (wildcard)</option>
+        <option value="team_name">Team name</option>
+        <option value="stadium_name">Stadium name</option>
+        <option value="stadium_capacity">Stadium capacity</option>
+        <option value="wins">wins</option>
+        <option value="draws">draws</option>
+        <option value="defeats">defeats</option>
+        <option value="goal_scored">goal scored</option>
+        <option value="goal_conceded">goal conceded</option>
+        <option value="points">points</option>
+        <option value="place">place</option>
+        <option value="captain_name">captain name</option>
+        <option value="captain_matches_played">captain matches played</option>
+        <option value="captain_goal">captain goal</option>
+        <option value="captain_assist">captain assist</option>
+        <option value="captain_yellow_card">captain yellow card</option>
+        <option value="captain_red_card">captain red card</option>
+        <option value="manager_name">manager name</option>
+      </select>
+      <br>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    
+    <br>
+    <% if(csv && json) { %>
+      <a href="/files/query.csv" download>
+        Download query.csv
+      </a>
+      <br>
+      <a href="/files/query.json" download>
+        Download query.json
+      </a>
+    <% } %>
+    </div>
+      
+
+    </div>
+    <div class="form-group pull-right">
+      <input type="text" id="myInput" onkeyup="myFunction()" class="search form-control" placeholder="Što tražite?">
+  </div>
+  <span class="counter pull-right"></span>
+  <table id="myTable" class="table table-hover table-bordered results">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th class="col-md-5 col-xs-5">Team name</th>
+        <th class="col-md-4 col-xs-4">Stadium name</th>
+        <th class="col-md-3 col-xs-3">Stadium capacity</th>
+        <th class="col-md-3 col-xs-3">Wins</th>
+        <th class="col-md-3 col-xs-3">Draws</th>
+        <th class="col-md-3 col-xs-3">Defeats</th>
+        <th class="col-md-3 col-xs-3">Goal scored</th>
+        <th class="col-md-3 col-xs-3">Goal conceded</th>
+        <th class="col-md-3 col-xs-3">Points</th>
+        <th class="col-md-3 col-xs-3">Place</th>
+        <th class="col-md-3 col-xs-3">Captain name</th>
+        <th class="col-md-3 col-xs-3">Captain matches played</th>
+        <th class="col-md-3 col-xs-3">Captain goal</th>
+        <th class="col-md-3 col-xs-3">Captain assist</th>
+        <th class="col-md-3 col-xs-3">Captain yellow card</th>
+        <th class="col-md-3 col-xs-3">Captain red card</th>
+        <th class="col-md-3 col-xs-3">Manager name</th>
+      </tr>
+      <tr class="warning no-result">
+        <td colspan="4"><i class="fa fa-warning"></i> No result</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(let i=0; i<podaci.length; i++) { %>
+        <tr>
+          <th scope="row"><%= i+1 %></th>
+          <td><%= podaci[i].team_name %></td>
+          <td><%= podaci[i].stadium_name %></td>
+          <td><%= podaci[i].stadium_capacity %></td>
+          <td><%= podaci[i].wins %></td>
+          <td><%= podaci[i].draws %></td>
+          <td><%= podaci[i].defeats %></td>
+          <td><%= podaci[i].goal_scored %></td>
+          <td><%= podaci[i].goal_conceded %></td>
+          <td><%= podaci[i].points %></td>
+          <td><%= podaci[i].place %></td>
+          <td><%= podaci[i].captain_name %></td>
+          <td><%= podaci[i].captain_matches_played %></td>
+          <td><%= podaci[i].captain_goal %></td>
+          <td><%= podaci[i].captain_assist %></td>
+          <td><%= podaci[i].captain_yellow_card %></td>
+          <td><%= podaci[i].captain_red_card %></td>
+          <td><%= podaci[i].manager_name %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+    <script>
+      function myFunction () {
+    var searchTerm = $(".search").val();
+    var listItem = $(".results tbody").children("tr");
+    var searchSplit = searchTerm.replace(/ /g, "'):containsi('");
+
+    $.extend($.expr[":"], {
+      containsi: function (elem, i, match, array) {
+        return (
+          (elem.textContent || elem.innerText || "")
+            .toLowerCase()
+            .indexOf((match[3] || "").toLowerCase()) >= 0
+        );
+      }
+    });
+
+    $(".results tbody tr")
+      .not(":containsi('" + searchSplit + "')")
+      .each(function (e) {
+        $(this).attr("visible", "false");
+      });
+
+    $(".results tbody tr:containsi('" + searchSplit + "')").each(function (e) {
+      $(this).attr("visible", "true");
+    });
+
+    var jobCount = $('.results tbody tr[visible="true"]').length;
+    $(".counter").text(jobCount + " item");
+
+    if (jobCount == "0") {
+      $(".no-result").show();
+    } else {
+      $(".no-result").hide();
+    }
+  }
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "openComputing",
+  "version": "1.0.0",
+  "description": "| Title|Premier League 21/22|\r | :-------------:|:-------------:|\r |Publication date|31.10.2022.|\r |Licence| mit |\r |Author|Marko Dodik|\r |Version|1.0|\r |Language|English|\r |Keywords|Premier League, EPL, Football|",
+  "main": "app.js",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdodik1609/openComputing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mdodik1609/openComputing/issues"
+  },
+  "homepage": "https://github.com/mdodik1609/openComputing#readme"
+}

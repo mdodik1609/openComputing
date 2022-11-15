@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="premier_league" content="premier league dataset season 2021/2022 stats">
+        <meta author="Marko Dodik">
+        <meta keywords="english premier league dataset season 2021/2022">
+        <meta description="Premier league dataset for season 2021/2022">
+        <title>Premier League</title>
+        <link rel="csv-data" href="./premier_league.csv">
+        <link rel="json-data" href="./premier_league.json">
+      </head>
+<body class="container">
+
+<main>
+  <div class="jumbotron">
+    <h1>This is great</h1>
+    <p>Welcome to templating using EJS</p>
+  </div>
+
+  <div>
+    <a href="/getdetails">Get Details</a>
+</div>
+<hr>
+    
+<% if(details!=null) { %>
+<table>
+<tr>
+    <th>team_name</th>
+    <th>stadium_name </th>
+    <th>stadium_capacity</th>
+    <th>wins </th>
+    <th>draws </th>
+    <th>defeats</th>
+    <th>goal_scored </th>
+    <th>goal_conceded </th>
+    <th>points</th>
+    <th>place </th>
+    <th>captain_name</th>
+    <th>captain_matches_played </th>
+    <th>captain_goal </th>
+    <th>captain_assist</th>
+    <th>captain_yellow_card </th>
+    <th>captain_red_card </th>
+    <th>manager_name</th>
+</tr>
+<% details.forEach(function(item){ %>
+<tr>
+    <td><%= item.team_name%></td>
+    <td><%= item.stadium_name %></td>
+    <td><%= item.stadium_capacity%></td>
+    <td><%= item.wins %></td>
+    <td><%= item.draws%></td>
+    <td><%= item.defeats%></td>
+    <td><%= item.goal_scored %></td>
+    <td><%= item.goal_conceded%></td>
+    <td><%= item.points%></td>
+    <td><%= item.place %></td>
+    <td><%= item.captain_name%></td>
+    <td><%= item.captain_matches_played></td>
+    <td><%= item.captain_goal %></td>
+    <td><%= item.captain_assist></td>
+    <td><%= item.captain_yellow_card%></td>
+    <td><%= item.captain_red_card %></td>
+    <td><%= item.manager_name%></td>
+</tr>
+<% }) %>
+</table>
+<% } %>
+
+
+</main>
+
+</body>
+</html>
